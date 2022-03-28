@@ -4,7 +4,7 @@ function concatStrings(string, separator = '') {
     if (typeof string === 'undefined' || typeof string !== 'string' || null || typeof separator !== 'string') {
       return result;
     } else {
-      result += `${string}${allseparator}`;
+      result += `${string}${separator}`;
       return temp;
     }
   }
@@ -12,23 +12,23 @@ function concatStrings(string, separator = '') {
 
 class Calculator {
   constructor(x, y) {
-    if (!x || !Number.isInteger(x) || !y || !Number.isInteger(y)) {
-      throw new Error("Values are empty or not a number. Enter valid values");
+    if (!x || !Number.isInteger(x) || !y || !Number.isInteger(y) || !isFinite(x) || !isFinite(y)) {
+      throw new Error('Values are empty or not a number/not finite. Enter valid values');
     }
     this.x = x;
     this.y = y;
   }
 
   setX(valueX) {
-    if (!valueX || !Number.isInteger(valueX)) {
-      throw new Error("Value X is empty or not a number. Enter valid X");
+    if (!valueX || !Number.isInteger(valueX) || !isFinite(x)) {
+      throw new Error('Value X is empty or not a number. Enter valid X');
     }
     this.x = valueX;
   }
 
   setY(valueY) {
-    if (!valueY || !Number.isInteger(valueY)) {
-      throw new Error("Value Y is empty or not a number. Enter valid Y");
+    if (!valueY || !Number.isInteger(valueY) || !isFinite(y)) {
+      throw new Error('Value Y is empty or not a number. Enter valid Y');
     }
     this.y = valueY;
   }
@@ -46,22 +46,12 @@ class Calculator {
   }
 
   logDiv(x = this.x, y = this.y) {
+    if (!isFinite(y) || !y) {
+      throw new Error ('Second number is null or not finite! Enter valid Y')
+    }
     return x / y;
   }
 }
-
-// const calculator = new Calculator(12, 3);
-
-// calculator.setX(10);
-// calculator.setY(5);
-
-// console.log("Sum", calculator.logSum());
-// console.log("Mul", calculator.logMul());
-// console.log("Sub", calculator.logSub());
-// console.log("Div", calculator.logDiv());
-
-// const test = calculator.logSum;
-// console.log("Test", test(3, 5));
 
 console.log(concatStrings('first')('second')('third')());            // 'firstsecondthird'
 console.log(concatStrings('first', null)('second')());               // 'firstsecond'
