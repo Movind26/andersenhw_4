@@ -1,23 +1,23 @@
 function concatStrings(string, separator = '') {
   let result = string;
-  const allSeparator = separator;
+  let finalSeparator = separator;
 
   return function temp(string, separator = '') {
-    if (typeof string === 'undefined' || typeof string !== 'string' || typeof allSeparator === null || null) {
+    if (typeof string === 'undefined' || typeof string !== 'string' || typeof finalSeparator === null || null) {
       return result;
-    } else if (!!allSeparator) {
-      result += `${allSeparator}${string}`;
+    } else if (finalSeparator) {
+      result += `${finalSeparator}${string}`;
       return temp;
-    } else if (!!separator.length) {
+    } else if (separator.length) {
       result += `${separator}${string}`;
-      allSeparator = separator;
+      finalSeparator = separator;
       return temp;
     } else {
       result += `${string}`;
       return temp;
     }
   }
-};
+}
 
 class Calculator {
   constructor(x, y) {
@@ -29,14 +29,14 @@ class Calculator {
   }
 
   setX(valueX) {
-    if (!valueX || !Number.isInteger(valueX) || !isFinite(x)) {
+    if (!valueX || !Number.isInteger(valueX) || !isFinite(this.x)) {
       throw new Error('Value X is empty or not a number. Enter valid X');
     }
     this.x = valueX;
   }
 
   setY(valueY) {
-    if (!valueY || !Number.isInteger(valueY) || !isFinite(y)) {
+    if (!valueY || !Number.isInteger(valueY) || !isFinite(this.y)) {
       throw new Error('Value Y is empty or not a number. Enter valid Y');
     }
     this.y = valueY;
@@ -70,11 +70,3 @@ class Calculator {
     return x / y;
   }
 }
-
-console.log(concatStrings('first')('second')('third')());            // 'firstsecondthird'
-console.log(concatStrings('first', null)('second')());               // 'firstsecond'
-console.log(concatStrings('first', '123')('second')('third')());     // 'first123second123third'
-
-console.log(concatStrings('some-value')('')('')(null));              // 'some-value'
-console.log(concatStrings('some-value')(2));                         // 'some-value'
-console.log(concatStrings('some-value')('333')(123n));               // 'some-val333'
