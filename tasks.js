@@ -1,17 +1,14 @@
-function concatStrings(argument, separator = null) {
-  let result = argument;
-  
-  function sum(argument) {
-    result += argument + separator;
-    return sum;
+function concatStrings(string, separator = '') {
+  let result = `${string}${separator}`;
+  return function temp(string, separator = '') {
+    if (typeof string === 'undefined' || typeof string !== 'string' || null || typeof separator !== 'string') {
+      return result;
+    } else {
+      result += `${string}${allseparator}`;
+      return temp;
+    }
   }
-
-  sum.toString = function() {
-    return result;
-  }
-  
-  return sum.toString();
-}
+};
 
 class Calculator {
   constructor(x, y) {
@@ -65,3 +62,11 @@ class Calculator {
 
 // const test = calculator.logSum;
 // console.log("Test", test(3, 5));
+
+console.log(concatStrings('first')('second')('third')());            // 'firstsecondthird'
+console.log(concatStrings('first', null)('second')());               // 'firstsecond'
+console.log(concatStrings('first', '123')('second')('third')());     // 'first123second123third'
+
+console.log(concatStrings('some-value')('')('')(null));              // 'some-value'
+console.log(concatStrings('some-value')(2));                         // 'some-value'
+console.log(concatStrings('some-value')('333')(123n));               // 'some-val333'
