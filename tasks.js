@@ -1,10 +1,19 @@
 function concatStrings(string, separator = '') {
-  let result = `${string}${separator}`;
+  let result = string;
+  const allSeparator = separator;
+
   return function temp(string, separator = '') {
-    if (typeof string === 'undefined' || typeof string !== 'string' || null || typeof separator !== 'string') {
+    if (typeof string === 'undefined' || typeof string !== 'string' || typeof allSeparator === null || null) {
       return result;
+    } else if (!!allSeparator) {
+      result += `${allSeparator}${string}`;
+      return temp;
+    } else if (!!separator.length) {
+      result += `${separator}${string}`;
+      allSeparator = separator;
+      return temp;
     } else {
-      result += `${string}${separator}`;
+      result += `${string}`;
       return temp;
     }
   }
@@ -34,20 +43,29 @@ class Calculator {
   }
 
   logSum(x = this.x, y = this.y) {
+    if (!isFinite(x) || !isFinite(y)) {
+      throw new Error('Enter valid numbers');
+    }
     return x + y;
   }
 
   logMul(x = this.x, y = this.y) {
+    if (!isFinite(x) || !isFinite(y)) {
+      throw new Error('Enter valid numbers');
+    }
     return x * y;
   }
 
   logSub(x = this.x, y = this.y) {
+    if (!isFinite(x) || !isFinite(y)) {
+      throw new Error('Enter valid numbers');
+    }
     return x - y;
   }
 
   logDiv(x = this.x, y = this.y) {
-    if (!isFinite(y) || !y) {
-      throw new Error ('Second number is null or not finite! Enter valid Y')
+    if (!isFinite(x) || !isFinite(y) || !y) {
+      throw new Error ('Second number is null or not finite! Enter valid Y');
     }
     return x / y;
   }
