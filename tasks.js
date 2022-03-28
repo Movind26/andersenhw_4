@@ -18,12 +18,13 @@ function concatStrings(string, separator = '') {
     }
   }
 }
-
+  
 class Calculator {
   constructor(x, y) {
     if (!x || !Number.isInteger(x) || !y || !Number.isInteger(y) || !isFinite(x) || !isFinite(y)) {
       throw new Error('Values are empty or not a number/not finite. Enter valid values');
     }
+
     this.x = x;
     this.y = y;
   }
@@ -32,6 +33,7 @@ class Calculator {
     if (!valueX || !Number.isInteger(valueX) || !isFinite(this.x)) {
       throw new Error('Value X is empty or not a number. Enter valid X');
     }
+
     this.x = valueX;
   }
 
@@ -39,6 +41,7 @@ class Calculator {
     if (!valueY || !Number.isInteger(valueY) || !isFinite(this.y)) {
       throw new Error('Value Y is empty or not a number. Enter valid Y');
     }
+
     this.y = valueY;
   }
 
@@ -46,6 +49,7 @@ class Calculator {
     if (!isFinite(x) || !isFinite(y)) {
       throw new Error('Enter valid numbers');
     }
+
     return x + y;
   }
 
@@ -53,6 +57,7 @@ class Calculator {
     if (!isFinite(x) || !isFinite(y)) {
       throw new Error('Enter valid numbers');
     }
+
     return x * y;
   }
 
@@ -60,6 +65,7 @@ class Calculator {
     if (!isFinite(x) || !isFinite(y)) {
       throw new Error('Enter valid numbers');
     }
+
     return x - y;
   }
 
@@ -67,6 +73,7 @@ class Calculator {
     if (!isFinite(x) || !isFinite(y) || !y) {
       throw new Error ('Second number is null or not finite! Enter valid Y');
     }
+
     return x / y;
   }
 }
