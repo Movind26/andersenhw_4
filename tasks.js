@@ -1,28 +1,24 @@
-function concatStrings(string, separator = '') {
+function concatStrings(string, separator = "") {
   let result = string;
   let finalSeparator = separator;
-
-  return function temp(string, separator = '') {
-    if (typeof string === 'undefined' || typeof string !== 'string' || typeof finalSeparator === null || null) {
+  let isValid = typeof string === "undefined" || typeof string !== "string" || typeof finalSeparator === null;
+  return function temp(string) {
+    if (isValid) {
       return result;
     } else if (finalSeparator) {
       result += `${finalSeparator}${string}`;
-      return temp;
-    } else if (separator.length) {
-      result += `${separator}${string}`;
-      finalSeparator = separator;
       return temp;
     } else {
       result += `${string}`;
       return temp;
     }
-  }
+  };
 }
-  
+
 class Calculator {
   constructor(x, y) {
-    if (!x || !Number.isInteger(x) || !y || !Number.isInteger(y) || !isFinite(x) || !isFinite(y)) {
-      throw new Error('Values are empty or not a number/not finite. Enter valid values');
+    if (!x || !Number.isInteger(x) || !y || !Number.isInteger(y) || !isFinite(x) || !isFinite(y) || arguments.length > 2) {
+      throw new Error("Values are empty or not a number/not finite. Enter valid values");
     }
 
     this.x = x;
@@ -30,16 +26,16 @@ class Calculator {
   }
 
   setX(valueX) {
-    if (!valueX || !Number.isInteger(valueX) || !isFinite(this.x)) {
-      throw new Error('Value X is empty or not a number. Enter valid X');
+    if (!valueX || !Number.isInteger(valueX) || !isFinite(valueX)) {
+      throw new Error("Value X is empty or not a number. Enter valid X");
     }
 
     this.x = valueX;
   }
 
   setY(valueY) {
-    if (!valueY || !Number.isInteger(valueY) || !isFinite(this.y)) {
-      throw new Error('Value Y is empty or not a number. Enter valid Y');
+    if (!valueY || !Number.isInteger(valueY) || !isFinite(valueY)) {
+      throw new Error("Value Y is empty or not a number. Enter valid Y");
     }
 
     this.y = valueY;
@@ -47,7 +43,7 @@ class Calculator {
 
   logSum(x = this.x, y = this.y) {
     if (!isFinite(x) || !isFinite(y)) {
-      throw new Error('Enter valid numbers');
+      throw new Error("Enter valid numbers");
     }
 
     return x + y;
@@ -55,7 +51,7 @@ class Calculator {
 
   logMul(x = this.x, y = this.y) {
     if (!isFinite(x) || !isFinite(y)) {
-      throw new Error('Enter valid numbers');
+      throw new Error("Enter valid numbers");
     }
 
     return x * y;
@@ -63,7 +59,7 @@ class Calculator {
 
   logSub(x = this.x, y = this.y) {
     if (!isFinite(x) || !isFinite(y)) {
-      throw new Error('Enter valid numbers');
+      throw new Error("Enter valid numbers");
     }
 
     return x - y;
@@ -71,7 +67,7 @@ class Calculator {
 
   logDiv(x = this.x, y = this.y) {
     if (!isFinite(x) || !isFinite(y) || !y) {
-      throw new Error ('Second number is null or not finite! Enter valid Y');
+      throw new Error("Second number is null or not finite! Enter valid Y");
     }
 
     return x / y;
